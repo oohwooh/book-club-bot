@@ -1,0 +1,10 @@
+openlibrary-client
+sqlalchemy
+alembic
+python-dotenv
+psycopg2
+python-telegram-bot
+openlibrary
+python-dateutil
+python-telegram-bot-pagination
+durations
