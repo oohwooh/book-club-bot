@@ -13,7 +13,7 @@ RUN pip install --prefix=/install -r /requirements.txt
 FROM base
 COPY --from=builder /install /usr/local
 # psycopg needs libpq
-RUN apk --no-cache add libpq
+RUN apk --no-cache add libpq alpine-conf
 RUN setup-timezone -z America/New_York
 COPY . /app/
 WORKDIR /app
