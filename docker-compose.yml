@@ -1,0 +1,30 @@
+version: "3.9"
+services:
+  db:
+    image: docker.io/postgres
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: CHANGE_ME
+      POSTGRES_DB: book_club_bot
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d book_club_bot"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+  book-club-bot:
+    build: .
+    restart: always
+    environment:
+      DB_USERNAME: admin
+      DB_PASSWORD: CHANGE_ME
+      DB_DB: book_club_bot
+      DB_HOST: db
+      BOT_TOKEN: CHANGE_ME
+    depends_on:
+      db:
+        condition: service_healthy
+volumes: 
+   pgdata:
